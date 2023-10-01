@@ -1,0 +1,22 @@
+PROBLEM STATEMENT: A thief is robbing a store and can carry a maximum weight of 'W' into his knapsack. There are 'N' Items available in the store and the weight and value of each item is known to the thief. Considering the constraints of the maximum weight that a knapsack can carry, you have to find the maximum profit that a
+
+thief can generate by stealing items. Note: The thief is not allowed to break the items. For example, N = 4, W= 10 and the weights and values of items are weights = [6, 1, 5, 3] and values = [3, 6, 1, 4]. Then the best way to fill the knapsack is to choose items with weight 6, 1 and 3. The total value of knapsack = 3 +6+4=13.
+
+SOLUTION:
+#include<bits/stdc++.h>
+
+using namespace std;
+
+int maxProfit(vector<int> &values, vector<int> &weights, int n, int w) {
+    vector<vector<int>> dp(n+1, vector<int>(w+1, 0));
+    for (int i=n-1; i>=0; i--) {
+        for (int W=0; W<=w; W++) {
+            if (weights[i] <= W) {
+                dp[i][W] = max(dp[i+1][W], dp[i+1][W-weights[i]] + values[i]);
+            } else {
+                dp[i][W] = dp[i+1][W];
+            }
+        }
+    }
+    return dp[0][w];
+}
