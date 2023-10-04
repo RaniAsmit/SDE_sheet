@@ -1,0 +1,22 @@
+Problem Statement: Given an array of N + 1 size, where each element is between 1 and N. Assuming there is only one duplicate number, your task is to find the duplicate number
+
+code:
+class Solution {
+public:
+    int findDuplicate(vector<int>& nums) {
+        int ind = 0;
+		
+		// sort the vector
+        sort(nums.begin(),nums.end());
+        for(int i = 0; i < nums.size() - 1; i++)
+        {
+            if(nums[i] == nums[i+1])
+            {
+                ind = nums[i];
+                break;
+            }
+        }
+        return ind;
+    }
+
+};
